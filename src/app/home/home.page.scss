@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+
+  .input-item {
+    width: 90%;
+  }
+
+  ion-button {
+    margin: 2rem;
+    width: 90%;
+  }
+
+
+  ion-list {
+    width: 100%;
+  }
+}

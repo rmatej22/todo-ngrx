@@ -1,1 +1,52 @@
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Todo List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-item class="input-item">
+      <ion-label position="floating">
+        Todo
+      </ion-label>
+      <ion-input placeholder="Add Your todo"
+                 [(ngModel)]="todo">
+      </ion-input>
+    </ion-item>
+    <ion-button color="success"
+                fill="outline">
+      Add Todo
+    </ion-button>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="trash-sharp"
+                  slot="end"
+                  color="danger">
+        </ion-icon>
+        <ion-label>
+          Pokémon Yellow
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="trash-sharp"
+                  slot="end"
+                  color="danger">
+        </ion-icon>
+        <ion-label>
+          Pokémon Yellow
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="trash-sharp"
+                  slot="end"
+                  color="danger">
+        </ion-icon>
+        <ion-label>
+          Pokémon Yellow
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
