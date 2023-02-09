@@ -16,35 +16,19 @@
       </ion-input>
     </ion-item>
     <ion-button color="success"
-                fill="outline">
+                fill="outline"
+                (click)="addTodo()">
       Add Todo
     </ion-button>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let todo of allTodos$ | async">
         <ion-icon name="trash-sharp"
                   slot="end"
-                  color="danger">
+                  color="danger"
+                  (click)="deleteTodo(todo.id)">
         </ion-icon>
         <ion-label>
-          Pokémon Yellow
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="trash-sharp"
-                  slot="end"
-                  color="danger">
-        </ion-icon>
-        <ion-label>
-          Pokémon Yellow
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="trash-sharp"
-                  slot="end"
-                  color="danger">
-        </ion-icon>
-        <ion-label>
-          Pokémon Yellow
+          {{ todo.content }}
         </ion-label>
       </ion-item>
     </ion-list>
