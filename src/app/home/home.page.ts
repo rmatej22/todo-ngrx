@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TodoElement } from '../models/todo-element';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
   todo: string = '';
+  allTodos$: Observable<TodoElement[]> | undefined;
 
   constructor() {}
 }
