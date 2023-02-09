@@ -17,7 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    StoreModule.forRoot({ todo: todoReducer }),
+    StoreModule.forRoot({ todos: todoReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
   ],
