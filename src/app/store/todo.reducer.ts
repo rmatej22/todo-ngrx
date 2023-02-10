@@ -10,7 +10,7 @@ export interface TodoState {
 
 export const initialState: TodoState = {
   todos: [],
-  error: '',
+  error: null,
   status: 'pending',
 };
 
@@ -38,6 +38,23 @@ export const todoReducer = createReducer(
     return {
       ...state,
       todos: state.todos.filter((todo) => todo.id != action.id),
+    };
+  }),
+  // on load todo success
+  on(TodoActions.loadTodosSuccess, (state, action): TodoState => {
+    return {
+      ...state,
+      todos: action.todos,
+      error: null,
+      status: 'success',
+    };
+  }),
+  // on load todo fail
+  on(TodoActions.loadTodosFail, (state, action): TodoState => {
+    return {
+      ...state,
+      error: action.error,
+      status: 'error',
     };
   })
 );
