@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { TodoService } from '../services/todo.service';
@@ -32,8 +32,10 @@ export class TodoEffects {
     () => {
       return this.actions$.pipe(
         ofType(TodoActions.addTodo, TodoActions.removeTodo),
-        withLatestFrom(this.store.select(selectTodoElements)),
-        switchMap(([action, todos]) => from(this.todoService.saveTodos(todos)))
+        concatLatestFrom(() => this.store.select(selectTodoElements)),
+        switchMap(([action, todos]) => {
+          return from(this.todoService.saveTodos(todos));
+        })
       );
     },
     { dispatch: false }
