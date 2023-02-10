@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { TodoService } from '../services/todo.service';
 import * as TodoActions from '../store/todo.actions';
+import { selectTodoElements } from './todo.selector';
 
 @Injectable()
 export class TodoEffects {
-  constructor(private actions$: Actions, private todoService: TodoService) {}
+  constructor(
+    private actions$: Actions,
+    private todoService: TodoService,
+    private store: Store
+  ) {}
 
   // effect for load todos action
   loadTodos$ = createEffect(() => {
@@ -20,4 +26,16 @@ export class TodoEffects {
       })
     );
   });
+
+  // effect that triggers when add todo or remove todo action is dispached
+  saveTodo$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(TodoActions.addTodo, TodoActions.removeTodo),
+        withLatestFrom(this.store.select(selectTodoElements)),
+        switchMap(([action, todos]) => from(this.todoService.saveTodos(todos)))
+      );
+    },
+    { dispatch: false }
+  );
 }
